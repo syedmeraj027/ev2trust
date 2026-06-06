@@ -17,7 +17,7 @@ export default function Home() {
         <div style={{ fontWeight: 800, fontSize: 22, color: "#111827" }}>
           EV<span style={{ color: "#16a34a" }}>2</span>Trust
         </div>
-        <div style={{ display: "flex", gap: 24, fontSize: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 14 }}>
           <Link href="/check" style={{ color: "#374151", textDecoration: "none" }}>Check VIN</Link>
           <Link href="/how-it-works" style={{ color: "#374151", textDecoration: "none" }}>How it works</Link>
           <Link href="/pricing" style={{ color: "#374151", textDecoration: "none" }}>Pricing</Link>
@@ -113,7 +113,7 @@ export default function Home() {
 
       {/* Features */}
       <section style={{ padding: "72px 24px", maxWidth: 900, margin: "0 auto" }}>
-        <h2 style={{ textAlign: "center", fontSize: 32, fontWeight: 800, marginBottom: 48 }}>
+        <h2 style={{ textAlign: "center", fontSize: 32, fontWeight: 800, marginBottom: 48, color: "#111827" }}>
           Everything in one report
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 20 }}>
@@ -128,10 +128,11 @@ export default function Home() {
             <div key={f.title} style={{
               padding: 20, borderRadius: 12,
               background: "#fff", border: "1px solid #e5e7eb",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
             }}>
               <div style={{ fontSize: 28, marginBottom: 10 }}>{f.icon}</div>
-              <div style={{ fontWeight: 600, marginBottom: 6, fontSize: 14 }}>{f.title}</div>
-              <div style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.5 }}>{f.desc}</div>
+              <div style={{ fontWeight: 600, marginBottom: 6, fontSize: 14, color: "#111827" }}>{f.title}</div>
+              <div style={{ fontSize: 13, color: "#4b5563", lineHeight: 1.5 }}>{f.desc}</div>
             </div>
           ))}
         </div>
