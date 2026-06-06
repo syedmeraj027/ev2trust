@@ -166,6 +166,15 @@ export default function Home() {
           EV<span style={{ color: "#4ade80" }}>2</span>Trust
         </div>
         <div>The global EV health &amp; history platform</div>
+        <div className="flex gap-4 flex-wrap items-center justify-center" style={{ marginTop: "16px", marginBottom: "16px" }}>
+  <Link href="/about">About</Link>
+  <Link href="/how-it-works">How it works</Link>
+  <Link href="/pricing">Pricing</Link>
+  <Link href="/privacy-policy">Privacy Policy</Link>
+  <Link href="/terms">Terms</Link>
+  <Link href="/disclaimer">Disclaimer</Link>
+  <Link href="/contact">Contact</Link>
+</div>
         <div style={{ marginTop: 16, color: "#4b5563" }}>
           © 2026 EV2Trust. Built for EV buyers everywhere.
         </div>
