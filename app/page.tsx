@@ -9,6 +9,15 @@ export default function Home() {
     <div style={{ minHeight: "100vh", background: "#f9fafb", fontFamily: "Inter, sans-serif" }}>
 
       <style>{`
+        /* --- NEW HOVER EFFECTS --- */
+        .text-link { transition: color 0.2s ease-in-out; }
+        .nav-links .text-link:hover { color: #16a34a !important; }
+        .footer-links .text-link:hover { color: #fff !important; }
+        
+        .btn-hover { transition: all 0.2s ease; }
+        .btn-hover:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        /* ------------------------- */
+
         .nav-links { display: flex; align-items: center; gap: 24px; font-size: 14px; }
         .nav-btn { background: #16a34a; color: #fff; padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; text-decoration: none; }
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -58,11 +67,11 @@ export default function Home() {
             EV<span style={{ color: "#16a34a" }}>2</span>Trust
           </Link>
           <div className="nav-links">
-            <Link href="/check" style={{ color: "#374151", textDecoration: "none" }}>Check VIN</Link>
-            <Link href="/how-it-works" style={{ color: "#374151", textDecoration: "none" }}>How it works</Link>
-            <Link href="/pricing" style={{ color: "#374151", textDecoration: "none" }}>Pricing</Link>
-            <Link href="/about" style={{ color: "#374151", textDecoration: "none" }}>About</Link>
-            <Link href="/check" className="nav-btn">Free Check →</Link>
+            <Link href="/check" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>Check VIN</Link>
+            <Link href="/how-it-works" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>How it works</Link>
+            <Link href="/pricing" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>Pricing</Link>
+            <Link href="/about" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>About</Link>
+            <Link href="/check" className="nav-btn btn-hover">Free Check →</Link>
           </div>
           <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
             <svg width="24" height="24" fill="none" stroke="#111827" strokeWidth="2" strokeLinecap="round">
@@ -109,7 +118,7 @@ export default function Home() {
 
         <div className="vin-box">
           <input type="text" placeholder="Enter VIN — e.g. 5YJ3E1EA7JF000001" maxLength={17} className="vin-input" />
-          <Link href="/check" className="vin-btn">Check free →</Link>
+          <Link href="/check" className="vin-btn btn-hover">Check free →</Link>
         </div>
 
         <p style={{ fontSize: 13, color: "#9ca3af" }}>
@@ -164,7 +173,7 @@ export default function Home() {
       <section style={{ background: "#16a34a", padding: "64px 24px", textAlign: "center" }}>
         <h2 className="cta-title">Check your EV right now — it&apos;s free</h2>
         <p style={{ color: "#bbf7d0", fontSize: 16, marginBottom: 32 }}>No signup required. First report completely free.</p>
-        <Link href="/check" style={{
+        <Link href="/check" className="btn-hover" style={{
           background: "#fff", color: "#16a34a",
           padding: "14px 32px", borderRadius: 10,
           fontWeight: 700, fontSize: 16, textDecoration: "none", display: "inline-block",
@@ -178,13 +187,13 @@ export default function Home() {
         </div>
         <div style={{ color: "#6b7280", marginBottom: 20 }}>The global EV health &amp; history platform</div>
         <div className="footer-links">
-          <Link href="/about" style={{ color: "#9ca3af", textDecoration: "none" }}>About</Link>
-          <Link href="/how-it-works" style={{ color: "#9ca3af", textDecoration: "none" }}>How it works</Link>
-          <Link href="/pricing" style={{ color: "#9ca3af", textDecoration: "none" }}>Pricing</Link>
-          <Link href="/privacy-policy" style={{ color: "#9ca3af", textDecoration: "none" }}>Privacy Policy</Link>
-          <Link href="/terms" style={{ color: "#9ca3af", textDecoration: "none" }}>Terms of Service</Link>
-          <Link href="/disclaimer" style={{ color: "#9ca3af", textDecoration: "none" }}>Disclaimer</Link>
-          <Link href="/contact" style={{ color: "#9ca3af", textDecoration: "none" }}>Contact Us</Link>
+          <Link href="/about" className="text-link" style={{ color: "#9ca3af", textDecoration: "none" }}>About</Link>
+          <Link href="/how-it-works" className="text-link" style={{ color: "#9ca3af", textDecoration: "none" }}>How it works</Link>
+          <Link href="/pricing" className="text-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Pricing</Link>
+          <Link href="/privacy-policy" className="text-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Privacy Policy</Link>
+          <Link href="/terms" className="text-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Terms of Service</Link>
+          <Link href="/disclaimer" className="text-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Disclaimer</Link>
+          <Link href="/contact" className="text-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Contact Us</Link>
         </div>
         <div style={{ color: "#4b5563", marginTop: 8 }}>© 2026 EV2Trust. Built for EV buyers everywhere.</div>
       </footer>
