@@ -3,7 +3,34 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div style={{ minHeight: "100vh", background: "#f9fafb", fontFamily: "Inter, sans-serif" }}>
-      
+
+      {/* Responsive styles */}
+      <style>{`
+        .nav-links { display: flex; align-items: center; gap: 24px; font-size: 14px; }
+        .nav-btn { background: #16a34a; color: #fff; padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; text-decoration: none; }
+        .hero-title { font-size: 52px; font-weight: 800; line-height: 1.15; color: #111827; margin-bottom: 20px; }
+        .hero-section { text-align: center; padding: 80px 24px 60px; max-width: 720px; margin: 0 auto; }
+        .vin-box { display: flex; gap: 10px; max-width: 560px; margin: 0 auto 16px; background: #fff; padding: 8px; border-radius: 14px; border: 1.5px solid #e5e7eb; box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+        .vin-input { flex: 1; border: none; outline: none; font-size: 15px; padding: 10px 14px; background: transparent; color: #111827; min-width: 0; }
+        .vin-btn { background: #16a34a; color: #fff; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+        .stats-bar { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 32px 24px; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; background: #fff; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .footer-links { margin-top: 16px; margin-bottom: 16px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: center; }
+
+        @media (max-width: 640px) {
+          .nav-links { gap: 12px; }
+          .nav-links a:not(.nav-btn) { display: none; }
+          .hero-title { font-size: 32px; }
+          .hero-section { padding: 48px 16px 40px; }
+          .vin-box { flex-direction: column; gap: 8px; margin: 0 0 16px; }
+          .vin-input { font-size: 14px; padding: 12px 14px; }
+          .vin-btn { text-align: center; padding: 12px 16px; font-size: 14px; }
+          .stats-bar { gap: 24px; padding: 24px 16px; }
+          .features-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+          .footer-links { gap: 12px; font-size: 12px; }
+        }
+      `}</style>
+
       {/* Navbar */}
       <nav style={{
         background: "#fff",
@@ -17,22 +44,17 @@ export default function Home() {
         <div style={{ fontWeight: 800, fontSize: 22, color: "#111827" }}>
           EV<span style={{ color: "#16a34a" }}>2</span>Trust
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 24, fontSize: 14 }}>
+        <div className="nav-links">
           <Link href="/check" style={{ color: "#374151", textDecoration: "none" }}>Check VIN</Link>
           <Link href="/how-it-works" style={{ color: "#374151", textDecoration: "none" }}>How it works</Link>
           <Link href="/pricing" style={{ color: "#374151", textDecoration: "none" }}>Pricing</Link>
-          <Link href="/check" style={{
-            background: "#16a34a", color: "#fff",
-            padding: "8px 18px", borderRadius: 8,
-            fontWeight: 600, fontSize: 13,
-            textDecoration: "none",
-          }}>Free Check →</Link>
+          <Link href="/check" className="nav-btn">Free Check →</Link>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section style={{ textAlign: "center", padding: "80px 24px 60px", maxWidth: 720, margin: "0 auto" }}>
-        
+      <section className="hero-section">
+
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 6,
           background: "#dcfce7", color: "#16a34a",
@@ -43,10 +65,7 @@ export default function Home() {
           Trusted globally — India · USA · UK · UAE · Germany
         </div>
 
-        <h1 style={{
-          fontSize: 52, fontWeight: 800,
-          lineHeight: 1.15, color: "#111827", marginBottom: 20,
-        }}>
+        <h1 className="hero-title">
           Know your EV&apos;s{" "}
           <span style={{ color: "#16a34a" }}>true health</span>{" "}
           before you buy
@@ -58,28 +77,14 @@ export default function Home() {
         </p>
 
         {/* VIN Input */}
-        <div style={{
-          display: "flex", gap: 10, maxWidth: 560, margin: "0 auto 16px",
-          background: "#fff", padding: 8, borderRadius: 14,
-          border: "1.5px solid #e5e7eb",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
-        }}>
+        <div className="vin-box">
           <input
             type="text"
             placeholder="Enter VIN — e.g. 5YJ3E1EA7JF000001"
             maxLength={17}
-            style={{
-              flex: 1, border: "none", outline: "none",
-              fontSize: 15, padding: "10px 14px",
-              background: "transparent", color: "#111827",
-            }}
+            className="vin-input"
           />
-          <Link href="/check" style={{
-            background: "#16a34a", color: "#fff",
-            padding: "12px 24px", borderRadius: 10,
-            fontWeight: 700, fontSize: 15,
-            textDecoration: "none", whiteSpace: "nowrap",
-          }}>
+          <Link href="/check" className="vin-btn">
             Check free →
           </Link>
         </div>
@@ -90,14 +95,7 @@ export default function Home() {
       </section>
 
       {/* Stats Bar */}
-      <section style={{
-        display: "flex", justifyContent: "center",
-        gap: 48, flexWrap: "wrap",
-        padding: "32px 24px",
-        borderTop: "1px solid #e5e7eb",
-        borderBottom: "1px solid #e5e7eb",
-        background: "#fff",
-      }}>
+      <section className="stats-bar">
         {[
           { num: "4.2M+", label: "Used EVs sold yearly" },
           { num: "50%", label: "Have hidden battery issues" },
@@ -116,7 +114,7 @@ export default function Home() {
         <h2 style={{ textAlign: "center", fontSize: 32, fontWeight: 800, marginBottom: 48, color: "#111827" }}>
           Everything in one report
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 20 }}>
+        <div className="features-grid">
           {[
             { icon: "🔋", title: "Battery health grade", desc: "A/B/C/D score — know exactly what you're buying" },
             { icon: "📍", title: "Real range estimate", desc: "Actual range based on battery degradation" },
@@ -152,7 +150,7 @@ export default function Home() {
           background: "#fff", color: "#16a34a",
           padding: "14px 32px", borderRadius: 10,
           fontWeight: 700, fontSize: 16,
-          textDecoration: "none",
+          textDecoration: "none", display: "inline-block",
         }}>
           Start free check →
         </Link>
@@ -167,11 +165,7 @@ export default function Home() {
           EV<span style={{ color: "#4ade80" }}>2</span>Trust
         </div>
         <div style={{ color: "#9ca3af" }}>The global EV health &amp; history platform</div>
-        <div style={{
-          marginTop: 16, marginBottom: 16,
-          display: "flex", gap: 16, flexWrap: "wrap",
-          alignItems: "center", justifyContent: "center",
-        }}>
+        <div className="footer-links">
           <Link href="/about" style={{ color: "#9ca3af", textDecoration: "none" }}>About</Link>
           <Link href="/how-it-works" style={{ color: "#9ca3af", textDecoration: "none" }}>How it works</Link>
           <Link href="/pricing" style={{ color: "#9ca3af", textDecoration: "none" }}>Pricing</Link>
