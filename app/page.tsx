@@ -4,42 +4,48 @@ export default function Home() {
   return (
     <div style={{ minHeight: "100vh", background: "#f9fafb", fontFamily: "Inter, sans-serif" }}>
 
-      {/* Responsive styles */}
       <style>{`
         .nav-links { display: flex; align-items: center; gap: 24px; font-size: 14px; }
         .nav-btn { background: #16a34a; color: #fff; padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; text-decoration: none; }
         .hero-title { font-size: 52px; font-weight: 800; line-height: 1.15; color: #111827; margin-bottom: 20px; }
         .hero-section { text-align: center; padding: 80px 24px 60px; max-width: 720px; margin: 0 auto; }
+        .hero-sub { font-size: 18px; color: #6b7280; line-height: 1.7; margin-bottom: 40px; }
         .vin-box { display: flex; gap: 10px; max-width: 560px; margin: 0 auto 16px; background: #fff; padding: 8px; border-radius: 14px; border: 1.5px solid #e5e7eb; box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
         .vin-input { flex: 1; border: none; outline: none; font-size: 15px; padding: 10px 14px; background: transparent; color: #111827; min-width: 0; }
-        .vin-btn { background: #16a34a; color: #fff; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
-        .stats-bar { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 32px 24px; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; background: #fff; }
+        .vin-btn { background: #16a34a; color: #fff; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; flex-shrink: 0; display: inline-block; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 600px; margin: 0 auto; }
+        .stat-item { text-align: center; padding: 24px 16px; border: 0.5px solid #e5e7eb; background: #fff; }
+        .stat-item:nth-child(1) { border-radius: 12px 0 0 0; }
+        .stat-item:nth-child(2) { border-radius: 0 12px 0 0; }
+        .stat-item:nth-child(3) { border-radius: 0 0 0 12px; }
+        .stat-item:nth-child(4) { border-radius: 0 0 12px 0; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .footer-links { margin-top: 16px; margin-bottom: 16px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: center; }
+        .cta-title { color: #fff; font-weight: 800; margin-bottom: 16px; }
 
         @media (max-width: 640px) {
           .nav-links { gap: 12px; }
           .nav-links a:not(.nav-btn) { display: none; }
-          .hero-title { font-size: 32px; }
-          .hero-section { padding: 48px 16px 40px; }
+          .hero-title { font-size: 30px; }
+          .hero-sub { font-size: 15px; }
+          .hero-section { padding: 40px 16px 32px; }
           .vin-box { flex-direction: column; gap: 8px; margin: 0 0 16px; }
           .vin-input { font-size: 14px; padding: 12px 14px; }
-          .vin-btn { text-align: center; padding: 12px 16px; font-size: 14px; }
-          .stats-bar { gap: 24px; padding: 24px 16px; }
+          .vin-btn { padding: 13px 16px; font-size: 14px; }
+          .stats-grid { max-width: 100%; margin: 0 16px; }
+          .stat-item { padding: 20px 12px; }
           .features-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-          .footer-links { gap: 12px; font-size: 12px; }
+          .footer-links { gap: 10px; font-size: 12px; }
+          .cta-title { font-size: 24px; }
         }
       `}</style>
 
       {/* Navbar */}
       <nav style={{
-        background: "#fff",
-        borderBottom: "1px solid #e5e7eb",
-        padding: "0 24px",
-        height: 60,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+        background: "#fff", borderBottom: "1px solid #e5e7eb",
+        padding: "0 24px", height: 60,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        position: "sticky", top: 0, zIndex: 50,
       }}>
         <div style={{ fontWeight: 800, fontSize: 22, color: "#111827" }}>
           EV<span style={{ color: "#16a34a" }}>2</span>Trust
@@ -52,9 +58,8 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="hero-section">
-
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 6,
           background: "#dcfce7", color: "#16a34a",
@@ -71,12 +76,11 @@ export default function Home() {
           before you buy
         </h1>
 
-        <p style={{ fontSize: 18, color: "#6b7280", lineHeight: 1.7, marginBottom: 40 }}>
+        <p className="hero-sub">
           Enter any EV&apos;s VIN number and get a complete battery health report,
           real range, recall alerts, and fair price — in under 60 seconds.
         </p>
 
-        {/* VIN Input */}
         <div className="vin-box">
           <input
             type="text"
@@ -84,9 +88,7 @@ export default function Home() {
             maxLength={17}
             className="vin-input"
           />
-          <Link href="/check" className="vin-btn">
-            Check free →
-          </Link>
+          <Link href="/check" className="vin-btn">Check free →</Link>
         </div>
 
         <p style={{ fontSize: 13, color: "#9ca3af" }}>
@@ -94,23 +96,25 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Stats Bar */}
-      <section className="stats-bar">
-        {[
-          { num: "4.2M+", label: "Used EVs sold yearly" },
-          { num: "50%", label: "Have hidden battery issues" },
-          { num: "$6,000", label: "Avg loss from bad EV purchase" },
-          { num: "60 sec", label: "To get your report" },
-        ].map((s) => (
-          <div key={s.label} style={{ textAlign: "center" }}>
-            <div style={{ fontSize: 28, fontWeight: 800, color: "#111827" }}>{s.num}</div>
-            <div style={{ fontSize: 13, color: "#6b7280", marginTop: 4 }}>{s.label}</div>
-          </div>
-        ))}
+      {/* Stats — proper 2x2 grid with borders */}
+      <section style={{ padding: "32px 24px", background: "#f9fafb" }}>
+        <div className="stats-grid" style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.08)", borderRadius: 12, overflow: "hidden" }}>
+          {[
+            { num: "4.2M+", label: "Used EVs sold yearly" },
+            { num: "50%", label: "Have hidden battery issues" },
+            { num: "$6,000", label: "Avg loss from bad EV purchase" },
+            { num: "60 sec", label: "To get your report" },
+          ].map((s) => (
+            <div key={s.label} className="stat-item">
+              <div style={{ fontSize: 26, fontWeight: 800, color: "#111827" }}>{s.num}</div>
+              <div style={{ fontSize: 12, color: "#6b7280", marginTop: 4, lineHeight: 1.4 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Features */}
-      <section style={{ padding: "72px 24px", maxWidth: 900, margin: "0 auto" }}>
+      <section style={{ padding: "60px 24px", maxWidth: 900, margin: "0 auto" }}>
         <h2 style={{ textAlign: "center", fontSize: 32, fontWeight: 800, marginBottom: 48, color: "#111827" }}>
           Everything in one report
         </h2>
@@ -137,10 +141,8 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section style={{
-        background: "#16a34a", padding: "64px 24px", textAlign: "center",
-      }}>
-        <h2 style={{ color: "#fff", fontSize: 32, fontWeight: 800, marginBottom: 16 }}>
+      <section style={{ background: "#16a34a", padding: "64px 24px", textAlign: "center" }}>
+        <h2 className="cta-title" style={{ fontSize: 32 }}>
           Check your EV right now — it&apos;s free
         </h2>
         <p style={{ color: "#bbf7d0", fontSize: 16, marginBottom: 32 }}>
@@ -149,8 +151,8 @@ export default function Home() {
         <Link href="/check" style={{
           background: "#fff", color: "#16a34a",
           padding: "14px 32px", borderRadius: 10,
-          fontWeight: 700, fontSize: 16,
-          textDecoration: "none", display: "inline-block",
+          fontWeight: 700, fontSize: 16, textDecoration: "none",
+          display: "inline-block",
         }}>
           Start free check →
         </Link>
