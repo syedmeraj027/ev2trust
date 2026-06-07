@@ -166,17 +166,21 @@ export default function Home() {
         <div style={{ fontWeight: 700, color: "#fff", fontSize: 18, marginBottom: 8 }}>
           EV<span style={{ color: "#4ade80" }}>2</span>Trust
         </div>
-        <div>The global EV health &amp; history platform</div>
-        <div className="flex gap-4 flex-wrap items-center justify-center" style={{ marginTop: "16px", marginBottom: "16px" }}>
-  <Link href="/about">About</Link>
-  <Link href="/how-it-works">How it works</Link>
-  <Link href="/pricing">Pricing</Link>
-  <Link href="/privacy-policy">Privacy Policy</Link>
-  <Link href="/terms">Terms</Link>
-  <Link href="/disclaimer">Disclaimer</Link>
-  <Link href="/contact">Contact</Link>
-</div>
-        <div style={{ marginTop: 16, color: "#4b5563" }}>
+        <div style={{ color: "#9ca3af" }}>The global EV health &amp; history platform</div>
+        <div style={{
+          marginTop: 16, marginBottom: 16,
+          display: "flex", gap: 16, flexWrap: "wrap",
+          alignItems: "center", justifyContent: "center",
+        }}>
+          <Link href="/about" style={{ color: "#9ca3af", textDecoration: "none" }}>About</Link>
+          <Link href="/how-it-works" style={{ color: "#9ca3af", textDecoration: "none" }}>How it works</Link>
+          <Link href="/pricing" style={{ color: "#9ca3af", textDecoration: "none" }}>Pricing</Link>
+          <Link href="/privacy-policy" style={{ color: "#9ca3af", textDecoration: "none" }}>Privacy Policy</Link>
+          <Link href="/terms" style={{ color: "#9ca3af", textDecoration: "none" }}>Terms</Link>
+          <Link href="/disclaimer" style={{ color: "#9ca3af", textDecoration: "none" }}>Disclaimer</Link>
+          <Link href="/contact" style={{ color: "#9ca3af", textDecoration: "none" }}>Contact</Link>
+        </div>
+        <div style={{ color: "#4b5563" }}>
           © 2026 EV2Trust. Built for EV buyers everywhere.
         </div>
       </footer>
