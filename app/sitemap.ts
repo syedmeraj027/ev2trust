@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://ev2trust.vercel.app";
+  const baseUrl = "https://www.ev2trust.com";
   return [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${baseUrl}/check`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },

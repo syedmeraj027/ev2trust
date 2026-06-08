@@ -67,7 +67,7 @@ export default function Home() {
             EV<span style={{ color: "#16a34a" }}>2</span>Trust
           </Link>
           <div className="nav-links">
-            <Link href="/check" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>Check VIN</Link>
+            <Link href="/sample-report" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>Sample Report</Link>
             <Link href="/how-it-works" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>How it works</Link>
             <Link href="/pricing" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>Pricing</Link>
             <Link href="/about" className="text-link" style={{ color: "#374151", textDecoration: "none" }}>About</Link>
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
         {/* Mobile Menu */}
         <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-          <Link href="/check" onClick={() => setMenuOpen(false)}>Check VIN</Link>
+          <Link href="/sample-report" onClick={() => setMenuOpen(false)}>Sample Report</Link>
           <Link href="/how-it-works" onClick={() => setMenuOpen(false)}>How it works</Link>
           <Link href="/pricing" onClick={() => setMenuOpen(false)}>Pricing</Link>
           <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>

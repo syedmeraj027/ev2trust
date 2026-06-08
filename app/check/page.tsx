@@ -45,9 +45,17 @@ function CheckPage() {
         .check-sub { color: #374151; font-size: 16px; text-align: center; margin-bottom: 36px; }
         .input-row { display: flex; gap: 10px; }
         .vin-field { flex: 1; padding: 12px 16px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 15px; font-family: monospace; outline: none; color: #111827; letter-spacing: 2px; min-width: 0; }
-        .check-btn { background: #16a34a; color: #fff; padding: 12px 24px; border-radius: 10px; border: none; font-weight: 700; font-size: 15px; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+        .check-btn { background: #16a34a; color: #fff; padding: 12px 24px; border-radius: 10px; border: none; font-weight: 700; font-size: 15px; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s ease-in-out; }
         .check-btn:disabled { background: #86efac; cursor: not-allowed; }
+        .check-btn:not(:disabled):hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); }
         .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        
+        /* HOVER EFFECTS */
+        .nav-link { transition: color 0.2s ease-in-out; }
+        .nav-link:hover { color: #16a34a !important; }
+        .footer-link { transition: color 0.2s ease-in-out; }
+        .footer-link:hover { color: #ffffff !important; }
+
         @media (max-width: 640px) {
           .check-wrap { padding: 32px 16px; }
           .check-title { font-size: 24px; }
@@ -59,19 +67,31 @@ function CheckPage() {
         }
       `}</style>
 
-      {/* Navbar */}
+      {/* PROFESSIONAL NAVBAR */}
       <nav style={{ background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 50 }}>
+        {/* FIX: Removed flex and gap from Logo to keep text unbroken */}
         <Link href="/" style={{ fontWeight: 800, fontSize: 22, color: "#111827", textDecoration: "none" }}>
           EV<span style={{ color: "#16a34a" }}>2</span>Trust
         </Link>
-        <Link href="/" style={{ fontSize: 14, color: "#111827", textDecoration: "none", fontWeight: 500 }}>← Home</Link>
+        
+        {/* Pro Home Button with SVG Icon to match other pages */}
+        <Link href="/" className="nav-link" style={{ 
+          display: "flex", alignItems: "center", gap: "6px", 
+          fontSize: 14, color: "#4b5563", textDecoration: "none", fontWeight: 600 
+        }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          Home
+        </Link>
       </nav>
 
       <div className="check-wrap">
         <h1 className="check-title">EV Health Check</h1>
         <p className="check-sub">Enter a VIN number to get instant recall alerts and vehicle info — free</p>
 
-        {/* Input */}
+        {/* Input Block */}
         <div style={{ background: "#fff", borderRadius: 16, padding: 24, border: "1px solid #e5e7eb", marginBottom: 16 }}>
           <label style={{ fontSize: 14, fontWeight: 600, color: "#111827", display: "block", marginBottom: 8 }}>
             Vehicle Identification Number (VIN)
@@ -114,7 +134,7 @@ function CheckPage() {
           ))}
         </div>
 
-        {/* Result */}
+        {/* Results Block */}
         {result && (
           <div style={{ background: "#fff", borderRadius: 16, padding: 24, border: "1px solid #e5e7eb" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20, flexWrap: "wrap", gap: 10 }}>
@@ -162,7 +182,7 @@ function CheckPage() {
               <p style={{ color: "#bfdbfe", fontSize: 13, marginBottom: 16 }}>
                 Battery grade A–D, real range, fair price and a shareable certificate.
               </p>
-              <Link href="/battery-check" style={{ background: "#fff", color: "#1e3a5f", padding: "10px 24px", borderRadius: 8, fontWeight: 700, fontSize: 14, textDecoration: "none" }}>
+              <Link href="/battery-check" style={{ background: "#fff", color: "#1e3a5f", padding: "10px 24px", borderRadius: 8, fontWeight: 700, fontSize: 14, textDecoration: "none", display: "inline-block", transition: "transform 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.03)"} onMouseLeave={(e) => e.currentTarget.style.transform = "none"}>
                 Run Battery Check →
               </Link>
             </div>
@@ -170,14 +190,16 @@ function CheckPage() {
         )}
       </div>
 
-      {/* Footer */}
+      {/* Synchronized Global Footer */}
       <footer style={{ background: "#111827", color: "#9ca3af", padding: "32px 24px", textAlign: "center", fontSize: 13, marginTop: 40 }}>
+        {/* FIX: Kept footer text pristine and uniform */}
         <div style={{ fontWeight: 800, color: "#fff", fontSize: 18, marginBottom: 8 }}>EV<span style={{ color: "#4ade80" }}>2</span>Trust</div>
         <div style={{ display: "flex", justifyContent: "center", gap: 20, flexWrap: "wrap", marginTop: 12 }}>
-          <Link href="/privacy-policy" style={{ color: "#9ca3af", textDecoration: "none" }}>Privacy Policy</Link>
-          <Link href="/terms" style={{ color: "#9ca3af", textDecoration: "none" }}>Terms of Service</Link>
-          <Link href="/disclaimer" style={{ color: "#9ca3af", textDecoration: "none" }}>Disclaimer</Link>
-          <Link href="/contact" style={{ color: "#9ca3af", textDecoration: "none" }}>Contact Us</Link>
+          <Link href="/about" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>About Us</Link>
+          <Link href="/privacy-policy" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Privacy Policy</Link>
+          <Link href="/terms" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Terms of Service</Link>
+          <Link href="/disclaimer" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Disclaimer</Link>
+          <Link href="/contact" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Contact Us</Link>
         </div>
         <div style={{ marginTop: 12, color: "#4b5563" }}>© 2026 EV2Trust. Built for EV buyers everywhere.</div>
       </footer>
