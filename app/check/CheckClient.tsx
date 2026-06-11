@@ -82,6 +82,12 @@ export default function CheckClient() {
           0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.4); }
           50% { transform: translateY(8px) scale(1.05); box-shadow: 0 20px 35px -5px rgba(22, 163, 74, 0.2); }
         }
+        /* ADDED THE GLOW ANIMATION HERE */
+        @keyframes pulseGlow { 
+          0% { box-shadow: 0 0 30px -10px rgba(14, 165, 233, 0.1); } 
+          100% { box-shadow: 0 0 50px -5px rgba(14, 165, 233, 0.3); } 
+        }
+
         .animate-reveal { animation: revealUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
@@ -187,30 +193,36 @@ export default function CheckClient() {
         .recall-icon-safe { background: #dcfce7; color: #15803d; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
         .recall-icon-danger { background: #fee2e2; color: #b91c1c; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
 
-        /* UPGRADED INTERACTIVE STEP 2 CARD */
+        /* ADVANCED POWERED DASHBOARD CARD (REPLACED AND FIXED) */
         .step-two-card {
-          background: linear-gradient(135deg, #15803d 0%, #166534 100%);
-          border-radius: 32px; padding: 48px 32px; text-align: center; 
-          box-shadow: 0 25px 50px -12px rgba(22, 163, 74, 0.5);
-          position: relative; overflow: hidden; border: 1px solid #4ade80;
+          background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+          border-radius: 32px; padding: 56px 32px; text-align: center; 
+          position: relative; overflow: hidden; border: 1px solid #334155;
+          animation: pulseGlow 4s infinite alternate; /* Glow animation now safe on this element */
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
         .step-two-card:hover { transform: scale(1.01); }
         .step-two-card::before {
           content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-          background: radial-gradient(circle at 50% 0%, rgba(74, 222, 128, 0.2) 0%, transparent 50%); pointer-events: none;
+          background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.08) 0%, transparent 50%); pointer-events: none;
         }
         .step-two-title {
-          color: #ffffff; font-weight: 900; font-size: 32px; margin-bottom: 12px; letter-spacing: -0.5px;
-          text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          color: #f8fafc; font-weight: 900; font-size: 32px; margin-bottom: 12px; letter-spacing: -0.5px;
+          text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .step-two-text {
+          color: #94a3b8; font-size: 17px; line-height: 1.7; max-width: 680px; margin: 0 auto 36px auto;
         }
 
         .btn-next-massive { 
-          background: #ffffff; color: #15803d; padding: 18px 40px; border-radius: 16px; 
+          background: #f1f5f9; color: #0f172a; padding: 18px 40px; border-radius: 16px; 
           font-weight: 900; font-size: 18px; text-decoration: none; display: inline-block; 
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
         }
-        .btn-next-massive:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 20px 35px rgba(0,0,0,0.3); }
+        .btn-next-massive:hover { 
+          background: #0ea5e9; color: #ffffff; transform: translateY(-4px) scale(1.05); 
+          box-shadow: 0 20px 35px rgba(14, 165, 233, 0.4); 
+        }
 
         /* MOBILE RESPONSIVENESS */
         @media (max-width: 768px) {
@@ -383,16 +395,17 @@ export default function CheckClient() {
               </div>
             </div>
 
-            {/* UPGRADED INTERACTIVE STEP 2 CARD */}
-            <div ref={stepTwoRef} className="step-two-card animate-reveal delay-200">
-              <p style={{ color: "#bbf7d0", fontSize: 13, fontWeight: 800, letterSpacing: 2, marginBottom: 12 }}>STEP 2 OF 2</p>
-              <h3 className="step-two-title">Check Battery Health</h3>
-              <p style={{ color: "#f0fdf4", fontSize: 17, marginBottom: 32, maxWidth: 600, margin: "0 auto 32px auto", lineHeight: 1.6, fontWeight: 500 }}>
-                Now that we have verified your vehicle, let's process your OBD-II scanner data to calculate exact battery degradation and current market value.
-              </p>
-              <Link href={`/battery-check?vin=${vin}&make=${result.make}&model=${result.model}&year=${result.year}`} className="btn-next-massive">
-                Go to Battery Calculator →
-              </Link>
+            {/* WRAPPER HANDLES REVEAL OPACITY, INNER CARD HANDLES GLOW (FIXES THE INVISIBLE BUG) */}
+            <div className="animate-reveal delay-200">
+              <div ref={stepTwoRef} className="step-two-card">
+                <h3 className="step-two-title">Advanced Battery Health Check</h3>
+                <p className="step-two-text">
+                  With vehicle identification established, we will now aggregate and model raw OBD-II diagnostic streams. Our algorithm will quantify exact cell state-of-health and compute a globally referenced asset valuation in your localized currency.
+                </p>
+                <Link href={`/battery-check?vin=${vin}&make=${result.make}&model=${result.model}&year=${result.year}`} className="btn-next-massive">
+                  Run Deep Diagnostic Model →
+                </Link>
+              </div>
             </div>
             
           </main>
