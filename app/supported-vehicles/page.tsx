@@ -1,281 +1,186 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
-export default function Pricing() {
-  const plans = [
-    {
-      name: "Free",
-      price: "₹0",
-      period: "",
-      color: "#6b7280",
-      border: "#e5e7eb",
-      popular: false,
-      desc: "Try before you buy",
-      features: [
-        "1 basic VIN check per month",
-        "Safety recall alerts",
-        "Vehicle specs from VIN",
-        "Government database check",
-        "Make, model and year info",
-      ],
-      cta: "Start for free",
-      href: "/check",
-    },
-    {
-      name: "Full Report",
-      price: "₹199",
-      period: "/report",
-      color: "#16a34a",
-      border: "#16a34a",
-      popular: true,
-      desc: "One-time, no account needed",
-      features: [
-        "Everything in Free",
-        "Battery health grade A to D",
-        "Real range estimate today",
-        "Fair price calculator",
-        "Shareable certificate link",
-        "Accident history check",
-        "Charge cycle analysis",
-      ],
-      cta: "Get full report",
-      href: "/check",
-    },
-    {
-      name: "Dealer Plan",
-      price: "₹999",
-      period: "/month",
-      color: "#2563eb",
-      border: "#e5e7eb",
-      popular: false,
-      desc: "For used EV dealers",
-      features: [
-        "Unlimited reports",
-        "Bulk VIN checker",
-        "Branded certificates",
-        "Full vehicle history",
-        "Analytics dashboard",
-        "API access",
-        "Priority support",
-      ],
-      cta: "Contact us",
-      href: "/contact",
-    },
+// STRICT SEO REQUIREMENT: Dynamic Meta Tags for Global EV Models
+export const metadata: Metadata = {
+  title: "Supported Vehicles & Compatibility | EV2Trust",
+  description: "Check if your electric vehicle is compatible with the EV2Trust battery health tool. Complete support lists for Tesla, Nissan, Chevrolet, Hyundai, and more.",
+  keywords: "EV compatibility, OBD2 EV scanner support, Tesla battery check, Nissan Leaf SoH tool, electric car diagnostics",
+};
+
+export default function SupportedVehiclesPage() {
+  const brands = [
+    { name: "Tesla", models: "Model 3, Model Y, Model S, Model X", status: "100% Fully Supported", icon: "⚡" },
+    { name: "Nissan", models: "Leaf (All Generations), Ariya", status: "100% Fully Supported", icon: "🍃" },
+    { name: "Chevrolet", models: "Bolt EV, Bolt EUV, Volt", status: "Fully Supported", icon: "🔌" },
+    { name: "Hyundai & Kia", models: "Ioniq 5, Ioniq 6, Kona EV, EV6, Niro EV", status: "Fully Supported", icon: "🔋" },
+    { name: "BMW & Mini", models: "i3, i4, iX3, iX, Cooper SE", status: "Fully Supported", icon: "🏁" },
+    { name: "Volkswagen", models: "ID.3, ID.4, ID.5, e-Golf", status: "Fully Supported", icon: "🚗" },
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f9fafb", fontFamily: "Inter, sans-serif" }}>
-
-      {/* CSS For Hover Effects */}
+    <div style={{ minHeight: "100vh", background: "#f9fafb", fontFamily: "Inter, sans-serif", display: "flex", flexDirection: "column", overflowX: "hidden" }}>
       <style>{`
-        .btn-green {
-          transition: all 0.2s ease-in-out;
+        /* SPRING-PHYSICS ANIMATIONS */
+        @keyframes springUp {
+          0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .animate-spring { 
+          animation: springUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards; 
+          opacity: 0; 
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+
+        /* INTERACTIVE LINKS & HOVERS */
+        .nav-link, .footer-link { transition: color 0.2s ease; }
+        .nav-link:hover { color: #16a34a !important; }
+        .footer-link:hover { color: #ffffff !important; }
+        
+        .btn-green-nav {
+          background: #16a34a; color: #fff; padding: 8px 20px; border-radius: 8px; 
+          font-weight: 600; font-size: 13px; text-decoration: none; 
+          box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.2); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
           display: inline-block;
         }
-        .btn-green:hover {
-          transform: scale(1.05) translateY(-2px);
-          box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2) !important;
+        .btn-green-nav:hover { transform: scale(1.05); }
+
+        /* HERO SECTION */
+        .hero-section {
+          position: relative;
+          padding: 100px 24px 40px 24px;
+          text-align: center;
+          background: radial-gradient(circle at 50% 0%, #dcfce7 0%, rgba(249, 250, 251, 0) 70%);
         }
-        .btn-blue {
-          transition: all 0.2s ease-in-out;
-          display: inline-block;
+        .hero-badge {
+          display: inline-block; background: rgba(22, 163, 74, 0.1); color: #15803d;
+          padding: 6px 16px; border-radius: 30px; font-size: 13px; font-weight: 800;
+          letter-spacing: 1.5px; margin-bottom: 24px; border: 1px solid rgba(22, 163, 74, 0.2);
         }
-        .btn-blue:hover {
-          transform: scale(1.05) translateY(-2px);
-          box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2) !important;
+        .hero-title { font-size: 52px; font-weight: 900; color: #111827; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 20px; }
+        .hero-sub { color: #4b5563; font-size: 19px; max-width: 680px; margin: 0 auto; line-height: 1.6; }
+
+        /* VEHICLE MATRIX GRID */
+        .matrix-container {
+          max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px 24px; width: 100%; box-sizing: border-box;
         }
-        .btn-plan {
-          transition: all 0.2s ease-in-out;
+        .matrix-grid {
+          display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
         }
-        .btn-plan:hover {
-          transform: scale(1.02) translateY(-1px);
+        .brand-card {
+          background: #ffffff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 32px;
+          display: flex; gap: 24px; align-items: flex-start;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
-        .nav-link {
-          transition: color 0.2s ease-in-out;
+        .brand-card:hover {
+          transform: translateY(-6px);
+          border-color: #86efac;
+          box-shadow: 0 20px 40px -10px rgba(22, 163, 74, 0.1);
         }
-        .nav-link:hover {
-          color: #16a34a !important;
+        .brand-icon-box {
+          width: 64px; height: 64px; background: #f8fafc; border: 1px solid #e2e8f0;
+          border-radius: 16px; display: flex; align-items: center; justify-content: center;
+          font-size: 28px; flex-shrink: 0; transition: transform 0.3s ease;
         }
-        .footer-link {
-          transition: color 0.2s ease-in-out;
+        .brand-card:hover .brand-icon-box {
+          transform: scale(1.1) rotate(4deg);
+          background: #f0fdf4; border-color: #bbf7d0;
         }
-        .footer-link:hover {
-          color: #ffffff !important;
+
+        /* HARDWARE REQUIREMENT NOTICE BANNER */
+        .notice-banner {
+          background: #111827; border-radius: 24px; padding: 48px; text-align: center;
+          color: #fff; margin-top: 56px; position: relative; overflow: hidden;
+        }
+        .notice-banner::before {
+          content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+          background: radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.15) 0%, transparent 50%); pointer-events: none;
+        }
+
+        /* MOBILE RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+          .hero-title { font-size: 38px; }
+          .matrix-grid { grid-template-columns: 1fr; gap: 16px; }
+          .brand-card { flex-direction: column; gap: 16px; padding: 24px; }
         }
       `}</style>
 
-      {/* PROFESSIONAL NAVBAR */}
-      <nav style={{
-        background: "#fff", borderBottom: "1px solid #e5e7eb",
-        padding: "0 24px", height: 60,
-        display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 50
-      }}>
-        {/* FIX: Removed flex and gap from Logo */}
+      {/* STANDARDIZED NAVBAR */}
+      <nav style={{ background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 50 }}>
         <Link href="/" style={{ fontWeight: 800, fontSize: 22, color: "#111827", textDecoration: "none" }}>
           EV<span style={{ color: "#16a34a" }}>2</span>Trust
         </Link>
-        
         <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-          {/* Pro Home Button with SVG Icon */}
-          <Link href="/" className="nav-link" style={{ 
-            display: "flex", alignItems: "center", gap: "6px", 
-            fontSize: 14, color: "#4b5563", textDecoration: "none", fontWeight: 600 
-          }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
+          <Link href="/" className="nav-link" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: 14, color: "#4b5563", textDecoration: "none", fontWeight: 600 }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             Home
           </Link>
-
-          {/* Green CTA Button */}
-          <Link href="/check" className="btn-green" style={{ 
-            background: "#16a34a", color: "#fff", 
-            padding: "8px 20px", borderRadius: 8, 
-            fontWeight: 600, fontSize: 13, textDecoration: "none",
-            boxShadow: "0 4px 6px -1px rgba(22, 163, 74, 0.2)"
-          }}>
-            Free Check →
+          <Link href="/check" className="btn-green-nav">
+            VIN Check →
           </Link>
         </div>
       </nav>
 
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "60px 24px" }}>
+      {/* HERO SECTION */}
+      <section className="hero-section animate-spring">
+        <div className="hero-badge">VEHICLE COMPATIBILITY</div>
+        <h1 className="hero-title">Supported Vehicles & <br/>Hardware Coverage</h1>
+        <p className="hero-sub">
+          EV2Trust is completely hardware-agnostic. If your electric car has a standard diagnostic port, our algorithm can decode its battery health.
+        </p>
+      </section>
 
-        <div style={{ textAlign: "center", marginBottom: 52 }}>
-          <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 12, color: "#111827" }}>
-            Simple, honest pricing
-          </h1>
-          <p style={{ color: "#374151", fontSize: 16 }}>
-            Start free. Pay only when you need the full picture.
-          </p>
-        </div>
-
-        {/* Plans */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20, marginBottom: 48 }}>
-          {plans.map((p) => (
-            <div key={p.name} style={{
-              background: "#fff", borderRadius: 16, padding: 28,
-              border: p.popular ? `2px solid ${p.border}` : `1px solid ${p.border}`,
-              position: "relative",
-              display: "flex", flexDirection: "column",
-            }}>
-              {p.popular && (
-                <div style={{
-                  position: "absolute", top: -13, left: "50%",
-                  transform: "translateX(-50%)",
-                  background: "#16a34a", color: "#fff",
-                  padding: "4px 16px", borderRadius: 20,
-                  fontSize: 12, fontWeight: 700, whiteSpace: "nowrap",
-                }}>
-                  Most popular
+      {/* COMPATIBILITY CARDS */}
+      <main className="matrix-container">
+        <div className="matrix-grid animate-spring delay-1">
+          {brands.map((brand, idx) => (
+            <div key={idx} className="brand-card">
+              <div className="brand-icon-box">{brand.icon}</div>
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: 6 }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 900, color: "#111827", margin: 0 }}>{brand.name}</h2>
+                  <span style={{ background: "#eafaf1", color: "#15803d", fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: "12px", border: "1px solid #bbf7d0" }}>
+                    {brand.status}
+                  </span>
                 </div>
-              )}
-
-              <div style={{ marginBottom: 20, flexGrow: 1 }}>
-                <div style={{ fontSize: 14, fontWeight: 700, color: p.color, marginBottom: 6 }}>{p.name}</div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: 2, marginBottom: 4 }}>
-                  <span style={{ fontSize: 38, fontWeight: 900, color: "#111827" }}>{p.price}</span>
-                  <span style={{ color: "#374151", fontSize: 14 }}>{p.period}</span>
-                </div>
-                <div style={{ fontSize: 13, color: "#374151", marginBottom: 20 }}>{p.desc}</div>
-
-                <div>
-                  {p.features.map((f) => (
-                    <div key={f} style={{
-                      display: "flex", gap: 8, alignItems: "flex-start", padding: "6px 0",
-                      borderBottom: "1px solid #f3f4f6",
-                    }}>
-                      <span style={{ color: "#16a34a", fontWeight: 700, fontSize: 15, flexShrink: 0 }}>✓</span>
-                      <span style={{ fontSize: 13, color: "#111827" }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <Link href={p.href} className={p.popular ? "btn-plan" : ""} style={{
-                display: "block", textAlign: "center",
-                background: p.popular ? p.color : "transparent",
-                color: p.popular ? "#fff" : p.color,
-                border: `1.5px solid ${p.color}`,
-                padding: "11px", borderRadius: 10,
-                fontWeight: 700, fontSize: 14,
-                textDecoration: "none",
-                marginTop: "auto",
-              }}>
-                {p.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
-
-        {/* FAQ strip */}
-        <div style={{ background: "#fff", borderRadius: 16, padding: 28, border: "1px solid #e5e7eb", marginBottom: 32 }}>
-          <h2 style={{ fontSize: 20, fontWeight: 800, marginBottom: 20, color: "#111827" }}>
-            Frequently asked questions
-          </h2>
-          {[
-            { q: "Is the free check really free?", a: "Yes, completely. No credit card needed. You get recall alerts and basic vehicle specs at no cost." },
-            { q: "What is a VIN number?", a: "VIN stands for Vehicle Identification Number. It is a unique 17-character code for every vehicle. Find it on your dashboard, door jamb, or registration document." },
-            { q: "Do I need an OBD dongle?", a: "For the battery health check, yes. A basic OBD-II Bluetooth dongle costs around ₹800 on Amazon. Use the free Car Scanner app to read your battery State of Health percentage." },
-            { q: "Is the shareable certificate link permanent?", a: "Yes. Once generated, your certificate link is permanently accessible. Paste it in any listing and buyers can view it anytime." },
-            { q: "Which EV brands are supported?", a: "All major brands — Tesla, Tata, BYD, Ola Electric, Ather, Nissan, Hyundai, Kia, BMW, Mercedes, Audi, Volkswagen, MG and more." },
-          ].map((item) => (
-            <div key={item.q} style={{
-              padding: "14px 0", borderBottom: "1px solid #f3f4f6",
-            }}>
-              <div style={{ fontWeight: 600, fontSize: 14, color: "#111827", marginBottom: 6 }}>
-                {item.q}
-              </div>
-              <div style={{ fontSize: 13, color: "#374151", lineHeight: 1.6 }}>
-                {item.a}
+                <p style={{ color: "#4b5563", fontSize: 15, fontWeight: 600, margin: "0 0 8px 0" }}>Confirmed Models:</p>
+                <p style={{ color: "#6b7280", fontSize: 14, lineHeight: 1.5, margin: 0 }}>{brand.models}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* B2B note */}
-        <div style={{
-          background: "#eff6ff", border: "1px solid #bfdbfe",
-          borderRadius: 12, padding: 20, textAlign: "center",
-        }}>
-          <p style={{ fontWeight: 700, color: "#1e40af", marginBottom: 6, fontSize: 15 }}>
-            Need B2B API access?
+        {/* COMPATIBILITY SUMMARY RULES BANNER */}
+        <div className="notice-banner animate-spring delay-2">
+          <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 12, letterSpacing: -0.5 }}>Don't see your EV on this list?</h3>
+          <p style={{ color: "#9ca3af", fontSize: 16, lineHeight: 1.6, maxWidth: 800, margin: "0 auto 0 auto", fontWeight: 500 }}>
+            Do not worry. The list above covers our highly optimized custom data templates, but **any electric vehicle manufactured globally after 1996** utilizes a standardized mandatory OBD-II communication protocol. As long as you can pull raw State of Health (SoH) percentages via your diagnostic application, EV2Trust can instantly process your verification report.
           </p>
-          <p style={{ color: "#1e40af", fontSize: 13, marginBottom: 14 }}>
-            Insurance companies, banks, and fleet operators — get battery health data via API. Custom pricing available.
-          </p>
-          <Link href="/contact" className="btn-blue" style={{
-            background: "#2563eb", color: "#fff",
-            padding: "10px 24px", borderRadius: 8,
-            fontWeight: 700, fontSize: 13, textDecoration: "none", display: "inline-block"
-          }}>
-            Contact us for B2B pricing →
-          </Link>
         </div>
+      </main>
 
-      </div>
-
-      {/* Synchronized Global Footer */}
-      <footer style={{
-        background: "#111827", color: "#9ca3af",
-        padding: "32px 24px", textAlign: "center", fontSize: 13, marginTop: 40,
-      }}>
-        <div style={{ fontWeight: 800, color: "#fff", fontSize: 18, marginBottom: 8 }}>
-          EV<span style={{ color: "#4ade80" }}>2</span>Trust
+      {/* STANDARDIZED 3-TIER FOOTER (REPLACED PRICING WITH SUPPORTED VEHICLES) */}
+      <footer style={{ background: "#111827", color: "#9ca3af", padding: "64px 24px 32px 24px", textAlign: "center", marginTop: "auto" }}>
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ fontWeight: 800, color: "#fff", fontSize: 24, marginBottom: 8 }}>EV<span style={{ color: "#4ade80" }}>2</span>Trust</div>
+          <p style={{ color: "#6b7280", fontSize: 14, fontWeight: 500 }}>The global EV health & history platform</p>
         </div>
-        <div style={{ color: "#9ca3af", marginBottom: 16 }}>The global EV health and history platform</div>
-        
-        <div style={{ display: "flex", justifyContent: "center", gap: 24, flexWrap: "wrap" }}>
-          <Link href="/about" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>About Us</Link>
-          <Link href="/privacy-policy" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Privacy Policy</Link>
-          <Link href="/terms" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Terms of Service</Link>
-          <Link href="/disclaimer" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Disclaimer</Link>
-          <Link href="/contact" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none" }}>Contact Us</Link>
+        <div style={{ display: "flex", justifyContent: "center", gap: "24px", flexWrap: "wrap", marginBottom: 32 }}>
+          <Link href="/about" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>About Us</Link>
+          <Link href="/how-it-works" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>How it works</Link>
+          <Link href="/supported-vehicles" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Supported Vehicles</Link>
+          <Link href="/privacy-policy" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Privacy Policy</Link>
+          <Link href="/terms" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Terms of Service</Link>
+          <Link href="/disclaimer" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Disclaimer</Link>
+          <Link href="/contact" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Contact Us</Link>
         </div>
-        
-        <div style={{ marginTop: 20, color: "#4b5563" }}>© 2026 EV2Trust. Built for EV buyers everywhere.</div>
+        <div style={{ borderTop: "1px solid #1f2937", paddingTop: 32, color: "#4b5563", fontSize: 13 }}>
+          © 2026 EV2Trust. All rights reserved.
+        </div>
       </footer>
-
     </div>
   );
 }
