@@ -1,186 +1,240 @@
-import { Metadata } from "next";
 import Link from "next/link";
+import { Metadata } from "next";
 
-// STRICT SEO REQUIREMENT: Dynamic Meta Tags for Global EV Models
+// Highly Optimized SEO Metadata based on your exact specs
 export const metadata: Metadata = {
-  title: "Supported Vehicles & Compatibility | EV2Trust",
-  description: "Check if your electric vehicle is compatible with the EV2Trust battery health tool. Complete support lists for Tesla, Nissan, Chevrolet, Hyundai, and more.",
-  keywords: "EV compatibility, OBD2 EV scanner support, Tesla battery check, Nissan Leaf SoH tool, electric car diagnostics",
+  title: "How It Works | EV2Trust - Global Battery Health",
+  description: "Generate bank-grade battery health certificates using OBD-II data in 60 seconds.",
+  keywords: ["EV battery check", "OBD2 EV scanner", "State of Health", "electric vehicle valuation"]
 };
 
-export default function SupportedVehiclesPage() {
-  const brands = [
-    { name: "Tesla", models: "Model 3, Model Y, Model S, Model X", status: "100% Fully Supported", icon: "⚡" },
-    { name: "Nissan", models: "Leaf (All Generations), Ariya", status: "100% Fully Supported", icon: "🍃" },
-    { name: "Chevrolet", models: "Bolt EV, Bolt EUV, Volt", status: "Fully Supported", icon: "🔌" },
-    { name: "Hyundai & Kia", models: "Ioniq 5, Ioniq 6, Kona EV, EV6, Niro EV", status: "Fully Supported", icon: "🔋" },
-    { name: "BMW & Mini", models: "i3, i4, iX3, iX, Cooper SE", status: "Fully Supported", icon: "🏁" },
-    { name: "Volkswagen", models: "ID.3, ID.4, ID.5, e-Golf", status: "Fully Supported", icon: "🚗" },
-  ];
-
+export default function HowItWorks() {
   return (
-    <div style={{ minHeight: "100vh", background: "#f9fafb", fontFamily: "Inter, sans-serif", display: "flex", flexDirection: "column", overflowX: "hidden" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: "#fafafa", fontFamily: "Inter, sans-serif", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      
       <style>{`
-        /* SPRING-PHYSICS ANIMATIONS */
-        @keyframes springUp {
-          0% { opacity: 0; transform: translateY(40px) scale(0.95); }
-          100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        .animate-spring { 
-          animation: springUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards; 
-          opacity: 0; 
-        }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
+        /* --- GLOBAL ANIMATIONS --- */
+        @keyframes revealUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(22, 163, 74, 0); } 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
-        /* INTERACTIVE LINKS & HOVERS */
-        .nav-link, .footer-link { transition: color 0.2s ease; }
-        .nav-link:hover { color: #16a34a !important; }
-        .footer-link:hover { color: #ffffff !important; }
-        
-        .btn-green-nav {
-          background: #16a34a; color: #fff; padding: 8px 20px; border-radius: 8px; 
-          font-weight: 600; font-size: 13px; text-decoration: none; 
-          box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.2); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-          display: inline-block;
-        }
-        .btn-green-nav:hover { transform: scale(1.05); }
+        .animate-reveal { animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
 
-        /* HERO SECTION */
-        .hero-section {
+        /* --- HERO SECTION --- */
+        .hero-section { text-align: center; padding: 100px 24px 80px; position: relative; z-index: 10; }
+        .hero-title { font-size: 56px; font-weight: 900; line-height: 1.1; color: #111827; margin-bottom: 24px; letter-spacing: -1.5px; }
+        .hero-sub { font-size: 20px; color: #4b5563; line-height: 1.6; max-width: 680px; margin: 0 auto; font-weight: 500; }
+        .gradient-text { background: linear-gradient(135deg, #16a34a 0%, #0ea5e9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* --- APPLE-ESQUE ALTERNATING TIMELINE --- */
+        .timeline-container { max-width: 1000px; margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 10; }
+        
+        /* The Center Line */
+        .timeline-container::before {
+          content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+          background: linear-gradient(to bottom, transparent, #e5e7eb 10%, #e5e7eb 90%, transparent);
+          transform: translateX(-50%); z-index: 0;
+        }
+
+        .timeline-step { display: flex; align-items: center; justify-content: space-between; margin-bottom: 80px; position: relative; z-index: 1; }
+        .timeline-step:nth-child(even) { flex-direction: row-reverse; }
+
+        .timeline-content {
+          width: 45%; background: #ffffff; padding: 40px; border-radius: 24px;
+          border: 1px solid #f3f4f6; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           position: relative;
-          padding: 100px 24px 40px 24px;
-          text-align: center;
-          background: radial-gradient(circle at 50% 0%, #dcfce7 0%, rgba(249, 250, 251, 0) 70%);
         }
-        .hero-badge {
-          display: inline-block; background: rgba(22, 163, 74, 0.1); color: #15803d;
-          padding: 6px 16px; border-radius: 30px; font-size: 13px; font-weight: 800;
-          letter-spacing: 1.5px; margin-bottom: 24px; border: 1px solid rgba(22, 163, 74, 0.2);
-        }
-        .hero-title { font-size: 52px; font-weight: 900; color: #111827; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 20px; }
-        .hero-sub { color: #4b5563; font-size: 19px; max-width: 680px; margin: 0 auto; line-height: 1.6; }
-
-        /* VEHICLE MATRIX GRID */
-        .matrix-container {
-          max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px 24px; width: 100%; box-sizing: border-box;
-        }
-        .matrix-grid {
-          display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-        }
-        .brand-card {
-          background: #ffffff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 32px;
-          display: flex; gap: 24px; align-items: flex-start;
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-        }
-        .brand-card:hover {
-          transform: translateY(-6px);
-          border-color: #86efac;
-          box-shadow: 0 20px 40px -10px rgba(22, 163, 74, 0.1);
-        }
-        .brand-icon-box {
-          width: 64px; height: 64px; background: #f8fafc; border: 1px solid #e2e8f0;
-          border-radius: 16px; display: flex; align-items: center; justify-content: center;
-          font-size: 28px; flex-shrink: 0; transition: transform 0.3s ease;
-        }
-        .brand-card:hover .brand-icon-box {
-          transform: scale(1.1) rotate(4deg);
-          background: #f0fdf4; border-color: #bbf7d0;
+        .timeline-content:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -15px rgba(22, 163, 74, 0.15); border-color: #bbf7d0; }
+        
+        .step-number {
+          position: absolute; top: -20px; left: 32px; background: #16a34a; color: #fff;
+          width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+          font-weight: 900; font-size: 18px; box-shadow: 0 4px 10px rgba(22, 163, 74, 0.3);
         }
 
-        /* HARDWARE REQUIREMENT NOTICE BANNER */
-        .notice-banner {
-          background: #111827; border-radius: 24px; padding: 48px; text-align: center;
-          color: #fff; margin-top: 56px; position: relative; overflow: hidden;
+        /* The Pulse Node on the Center Line */
+        .timeline-node {
+          position: absolute; left: 50%; transform: translateX(-50%);
+          width: 16px; height: 16px; background: #fff; border: 4px solid #16a34a;
+          border-radius: 50%; z-index: 2; box-shadow: 0 0 0 4px #f0fdf4;
         }
-        .notice-banner::before {
-          content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-          background: radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.15) 0%, transparent 50%); pointer-events: none;
-        }
+        .timeline-step:hover .timeline-node { animation: pulseGlow 1.5s infinite; }
 
-        /* MOBILE RESPONSIVE DESIGN */
+        .step-title { font-size: 24px; font-weight: 800; color: #111827; margin-bottom: 16px; margin-top: 12px; letter-spacing: -0.5px;}
+        .step-desc { font-size: 16px; color: #4b5563; line-height: 1.6; margin: 0; }
+
+        /* Floating Graphics */
+        .timeline-graphic { width: 45%; display: flex; justify-content: center; animation: float 6s ease-in-out infinite; font-size: 80px; }
+        .timeline-step:nth-child(even) .timeline-graphic { animation-delay: 1s; }
+
+        /* --- DARK SLATE CTA BANNER --- */
+        .cta-section { background: #0f172a; padding: 100px 24px; text-align: center; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.15) 0%, transparent 50%); pointer-events: none; }
+        .cta-title { color: #f8fafc; font-weight: 900; margin-bottom: 16px; font-size: 40px; letter-spacing: -1px; position: relative; z-index: 10; margin-top: 0;}
+        .cta-sub { color: #94a3b8; font-size: 18px; margin-bottom: 40px; position: relative; z-index: 10; font-weight: 500;}
+        .cta-btn { background: #16a34a; color: #ffffff; padding: 18px 40px; border-radius: 12px; font-size: 16px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; z-index: 10; border: 1px solid #15803d;}
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(22, 163, 74, 0.3); background: #15803d; }
+
+        /* --- PROFESSIONAL FOOTER --- */
+        .footer { background: #0f172a; color: #94a3b8; padding: 0 24px 40px; text-align: center; font-size: 14px; position: relative; z-index: 10; border-top: 1px solid #1e293b; }
+        .footer-logo { font-weight: 900; color: #fff; font-size: 28px; margin-bottom: 8px; letter-spacing: -0.5px; padding-top: 64px;}
+        .footer-sub { color: #cbd5e1; margin-bottom: 48px; font-weight: 500; font-size: 15px; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 48px; }
+        .footer-link { color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s ease; }
+        .footer-link:hover { color: #ffffff; }
+        .footer-bottom { border-top: 1px solid #1e293b; padding-top: 32px; color: #475569; font-size: 13px; font-weight: 500; }
+
+        /* --- MINIMAL NAVBAR --- */
+        .glass-nav { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid #e5e7eb; box-shadow: 0 4px 30px rgba(0,0,0,0.03); }
+        .nav-inner { max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 40px; height: 80px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
+        .text-link { color: #374151; font-weight: 600; text-decoration: none; transition: color 0.2s ease; }
+        .text-link:hover { color: #16a34a; }
+        .nav-links { display: flex; align-items: center; gap: 32px; font-size: 15px; }
+        .nav-btn { background: #16a34a; color: #fff; padding: 12px 28px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(22, 163, 74, 0.2); }
+        .nav-btn:hover { background: #15803d; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3); }
+
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-          .hero-title { font-size: 38px; }
-          .matrix-grid { grid-template-columns: 1fr; gap: 16px; }
-          .brand-card { flex-direction: column; gap: 16px; padding: 24px; }
+          .nav-inner { padding: 0 20px; }
+          .nav-links { display: none; }
+          .hero-title { font-size: 42px; letter-spacing: -1px;}
+          .hero-sub { font-size: 16px; margin-bottom: 32px; }
+          
+          .timeline-container::before { left: 24px; }
+          .timeline-step, .timeline-step:nth-child(even) { flex-direction: column; align-items: flex-end; margin-bottom: 48px;}
+          .timeline-content { width: calc(100% - 64px); padding: 32px 24px; }
+          .timeline-node { left: 24px; top: 24px; transform: translateX(-50%); }
+          .step-number { left: auto; right: 24px; top: -20px; }
+          .timeline-graphic { display: none; } /* Hide floating graphics on mobile for cleaner look */
         }
       `}</style>
 
-      {/* STANDARDIZED NAVBAR */}
-      <nav style={{ background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 50 }}>
-        <Link href="/" style={{ fontWeight: 800, fontSize: 22, color: "#111827", textDecoration: "none" }}>
-          EV<span style={{ color: "#16a34a" }}>2</span>Trust
-        </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-          <Link href="/" className="nav-link" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: 14, color: "#4b5563", textDecoration: "none", fontWeight: 600 }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            Home
+      {/* NAVBAR */}
+      <nav className="glass-nav">
+        <div className="nav-inner">
+          <Link href="/" style={{ fontWeight: 900, fontSize: 24, color: "#111827", textDecoration: "none", letterSpacing: "-0.5px" }}>
+            EV<span style={{ color: "#16a34a" }}>2</span>Trust
           </Link>
-          <Link href="/check" className="btn-green-nav">
-            VIN Check →
-          </Link>
+          <div className="nav-links">
+            <Link href="/" className="text-link">Home</Link>
+            <Link href="/sample-report" className="text-link">Sample Report</Link>
+            <Link href="/supported-vehicles" className="text-link">Supported Vehicles</Link>
+            <Link href="/blog" className="text-link">Blog</Link>
+            <Link href="/check" className="nav-btn">Free Check →</Link>
+          </div>
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="hero-section animate-spring">
-        <div className="hero-badge">VEHICLE COMPATIBILITY</div>
-        <h1 className="hero-title">Supported Vehicles & <br/>Hardware Coverage</h1>
-        <p className="hero-sub">
-          EV2Trust is completely hardware-agnostic. If your electric car has a standard diagnostic port, our algorithm can decode its battery health.
-        </p>
-      </section>
+      <div style={{ flex: 1 }}>
+        {/* HEADER */}
+        <section className="hero-section animate-reveal">
+          <h1 className="hero-title">How <span className="gradient-text">EV2Trust</span> works</h1>
+          <p className="hero-sub">Six simple steps to generate a bank-grade, universally recognized electric vehicle health certificate and market valuation.</p>
+        </section>
 
-      {/* COMPATIBILITY CARDS */}
-      <main className="matrix-container">
-        <div className="matrix-grid animate-spring delay-1">
-          {brands.map((brand, idx) => (
-            <div key={idx} className="brand-card">
-              <div className="brand-icon-box">{brand.icon}</div>
-              <div>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: 6 }}>
-                  <h2 style={{ fontSize: 20, fontWeight: 900, color: "#111827", margin: 0 }}>{brand.name}</h2>
-                  <span style={{ background: "#eafaf1", color: "#15803d", fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: "12px", border: "1px solid #bbf7d0" }}>
-                    {brand.status}
-                  </span>
-                </div>
-                <p style={{ color: "#4b5563", fontSize: 15, fontWeight: 600, margin: "0 0 8px 0" }}>Confirmed Models:</p>
-                <p style={{ color: "#6b7280", fontSize: 14, lineHeight: 1.5, margin: 0 }}>{brand.models}</p>
-              </div>
+        {/* TIMELINE */}
+        <div className="timeline-container">
+          
+          <div className="timeline-step animate-reveal delay-100">
+            <div className="timeline-node"></div>
+            <div className="timeline-content">
+              <div className="step-number">1</div>
+              <h3 className="step-title">Enter the VIN</h3>
+              <p className="step-desc">Start by entering the 17-character Vehicle Identification Number. Our engine instantly queries government databases to verify the make, model, year, and trim level.</p>
             </div>
-          ))}
+            <div className="timeline-graphic">🚗</div>
+          </div>
+
+          <div className="timeline-step animate-reveal delay-200">
+            <div className="timeline-node"></div>
+            <div className="timeline-content">
+              <div className="step-number">2</div>
+              <h3 className="step-title">Scan NHTSA Databases</h3>
+              <p className="step-desc">We cross-reference the VIN with official US Government safety records to check for any unfulfilled, dangerous manufacturing recalls or service bulletins.</p>
+            </div>
+            <div className="timeline-graphic">⚠️</div>
+          </div>
+
+          <div className="timeline-step animate-reveal delay-300">
+            <div className="timeline-node"></div>
+            <div className="timeline-content">
+              <div className="step-number">3</div>
+              <h3 className="step-title">Connect OBD-II (Optional)</h3>
+              <p className="step-desc">For a deep diagnostic, connect a standard OBD-II scanner. We analyze raw battery cells to determine the true State of Health (SoH) and exact battery degradation percentage.</p>
+            </div>
+            <div className="timeline-graphic">🔌</div>
+          </div>
+
+          <div className="timeline-step animate-reveal delay-100">
+            <div className="timeline-node"></div>
+            <div className="timeline-content">
+              <div className="step-number">4</div>
+              <h3 className="step-title">Compute Real Range</h3>
+              <p className="step-desc">Based on the battery's degraded capacity, our algorithms recalculate the vehicle's actual expected driving range, replacing the original factory estimates.</p>
+            </div>
+            <div className="timeline-graphic">📍</div>
+          </div>
+
+          <div className="timeline-step animate-reveal delay-200">
+            <div className="timeline-node"></div>
+            <div className="timeline-content">
+              <div className="step-number">5</div>
+              <h3 className="step-title">AI Market Valuation</h3>
+              <p className="step-desc">We analyze regional used EV sales data, factor in the exact battery degradation score, and compute a fair market price delivered directly in your local currency.</p>
+            </div>
+            <div className="timeline-graphic">💰</div>
+          </div>
+
+          <div className="timeline-step animate-reveal delay-300">
+            <div className="timeline-node"></div>
+            <div className="timeline-content">
+              <div className="step-number">6</div>
+              <h3 className="step-title">Generate Certificate</h3>
+              <p className="step-desc">You receive a certified, public link containing the full A/B/C/D grade report. Paste it directly into your marketplace listings to build immediate buyer trust.</p>
+            </div>
+            <div className="timeline-graphic">🔗</div>
+          </div>
+
         </div>
 
-        {/* COMPATIBILITY SUMMARY RULES BANNER */}
-        <div className="notice-banner animate-spring delay-2">
-          <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 12, letterSpacing: -0.5 }}>Don't see your EV on this list?</h3>
-          <p style={{ color: "#9ca3af", fontSize: 16, lineHeight: 1.6, maxWidth: 800, margin: "0 auto 0 auto", fontWeight: 500 }}>
-            Do not worry. The list above covers our highly optimized custom data templates, but **any electric vehicle manufactured globally after 1996** utilizes a standardized mandatory OBD-II communication protocol. As long as you can pull raw State of Health (SoH) percentages via your diagnostic application, EV2Trust can instantly process your verification report.
-          </p>
-        </div>
-      </main>
+        {/* DARK SLATE CTA */}
+        <section className="cta-section">
+          <h2 className="cta-title">Ready to uncover the true health?</h2>
+          <p className="cta-sub">Run your first diagnostic report in under 60 seconds.</p>
+          <Link href="/check" className="cta-btn">
+            Start your free check →
+          </Link>
+        </section>
 
-      {/* STANDARDIZED 3-TIER FOOTER (REPLACED PRICING WITH SUPPORTED VEHICLES) */}
-      <footer style={{ background: "#111827", color: "#9ca3af", padding: "64px 24px 32px 24px", textAlign: "center", marginTop: "auto" }}>
-        <div style={{ marginBottom: 24 }}>
-          <div style={{ fontWeight: 800, color: "#fff", fontSize: 24, marginBottom: 8 }}>EV<span style={{ color: "#4ade80" }}>2</span>Trust</div>
-          <p style={{ color: "#6b7280", fontSize: 14, fontWeight: 500 }}>The global EV health & history platform</p>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center", gap: "24px", flexWrap: "wrap", marginBottom: 32 }}>
-          <Link href="/about" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>About Us</Link>
-          <Link href="/how-it-works" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>How it works</Link>
-          <Link href="/supported-vehicles" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Supported Vehicles</Link>
-          <Link href="/privacy-policy" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Privacy Policy</Link>
-          <Link href="/terms" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Terms of Service</Link>
-          <Link href="/disclaimer" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Disclaimer</Link>
-          <Link href="/contact" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Contact Us</Link>
-        </div>
-        <div style={{ borderTop: "1px solid #1f2937", paddingTop: 32, color: "#4b5563", fontSize: 13 }}>
-          © 2026 EV2Trust. All rights reserved.
+      </div>
+
+      {/* STANDARDIZED FOOTER */}
+      <footer className="footer">
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          <div className="footer-logo">EV<span style={{ color: "#4ade80" }}>2</span>Trust</div>
+          <div className="footer-sub">The global EV health &amp; history platform</div>
+          
+          <div className="footer-links">
+            <Link href="/about" className="footer-link">About Us</Link>
+            <Link href="/how-it-works" className="footer-link">How it works</Link>
+            <Link href="/supported-vehicles" className="footer-link">Supported Vehicles</Link>
+            <Link href="/blog" className="footer-link">Blog</Link>
+            <Link href="/privacy-policy" className="footer-link">Privacy Policy</Link>
+            <Link href="/terms" className="footer-link">Terms of Service</Link>
+            <Link href="/disclaimer" className="footer-link">Disclaimer</Link>
+            <Link href="/contact" className="footer-link">Contact Us</Link>
+          </div>
+          
+          <div className="footer-bottom">
+            © 2026 EV2Trust. Built for EV buyers everywhere.
+          </div>
         </div>
       </footer>
+
     </div>
   );
 }
