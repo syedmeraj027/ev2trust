@@ -34,19 +34,66 @@ export default function SupportedVehiclesPage() {
         
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
 
-        /* INTERACTIVE LINKS & HOVERS */
-        .nav-link, .footer-link { transition: color 0.2s ease; }
-        .nav-link:hover { color: #16a34a !important; }
-        .footer-link:hover { color: #ffffff !important; }
-        
-        .btn-green-nav {
-          background: #16a34a; color: #fff; padding: 8px 20px; border-radius: 8px; 
-          font-weight: 600; font-size: 13px; text-decoration: none; 
-          box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.2); transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-          display: inline-block;
+        /* ACCESSIBILITY: VISIBLE FOCUS STATES */
+        a:focus-visible, button:focus-visible {
+          outline: 2px solid #16a34a;
+          outline-offset: 3px;
+          border-radius: 6px;
         }
-        .btn-green-nav:hover { transform: scale(1.05); }
+
+        /* NAVBAR */
+        .navbar {
+          background: linear-gradient(to bottom, #d1fae5, #f9fafb);
+          padding: 12px 24px;
+          min-height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          flex-wrap: wrap;
+          gap: 16px;
+        }
+        .navbar-links {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+          flex-wrap: wrap;
+        }
+
+        /* NAV LINKS WITH UNDERLINE HOVER + ACTIVE STATE */
+        .nav-link {
+          font-size: 14px; color: #4b5563; text-decoration: none; font-weight: 600;
+          position: relative; padding-bottom: 4px; transition: color 0.2s ease;
+        }
+        .nav-link::after {
+          content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+          background: #16a34a; transition: width 0.3s ease;
+        }
+        .nav-link:hover { color: #16a34a; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: #16a34a; }
+        .nav-link.active::after { width: 100%; }
+
+        /* FOOTER LINKS */
+        .footer-link { transition: color 0.2s ease; }
+        .footer-link:hover { color: #ffffff !important; }
+        .footer-link.active { color: #ffffff; }
+
+        /* FREE CHECK BUTTON */
+        .btn-dark-nav {
+          background: #111827; color: #fff; padding: 10px 22px; border-radius: 999px;
+          font-weight: 600; font-size: 14px; text-decoration: none;
+          display: inline-block; transition: all 0.25s ease;
+        }
+        .btn-dark-nav:hover {
+          background: #16a34a;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3);
+        }
 
         /* HERO SECTION */
         .hero-section {
@@ -100,7 +147,20 @@ export default function SupportedVehiclesPage() {
           background: radial-gradient(circle at 50% 0%, rgba(22, 163, 74, 0.15) 0%, transparent 50%); pointer-events: none;
         }
 
+        /* CTA SECTION */
+        .cta-btn {
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .cta-btn:hover {
+          transform: scale(1.05) translateY(-3px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
         /* MOBILE RESPONSIVE DESIGN */
+        @media (max-width: 860px) {
+          .navbar { justify-content: center; text-align: center; }
+          .navbar-links { justify-content: center; gap: 16px 24px; }
+        }
         @media (max-width: 768px) {
           .hero-title { font-size: 38px; }
           .matrix-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -108,19 +168,17 @@ export default function SupportedVehiclesPage() {
         }
       `}</style>
 
-      {/* STANDARDIZED NAVBAR */}
-      <nav style={{ background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "0 24px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 50 }}>
+      {/* NAVBAR */}
+      <nav className="navbar">
         <Link href="/" style={{ fontWeight: 800, fontSize: 22, color: "#111827", textDecoration: "none" }}>
           EV<span style={{ color: "#16a34a" }}>2</span>Trust
         </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-          <Link href="/" className="nav-link" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: 14, color: "#4b5563", textDecoration: "none", fontWeight: 600 }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            Home
-          </Link>
-          <Link href="/check" className="btn-green-nav">
-            VIN Check →
-          </Link>
+        <div className="navbar-links">
+          <Link href="/sample-report" className="nav-link">Sample Report</Link>
+          <Link href="/how-it-works" className="nav-link">How it works</Link>
+          <Link href="/supported-vehicles" className="nav-link active">Supported Vehicles</Link>
+          <Link href="/blog" className="nav-link">Blog</Link>
+          <Link href="/check" className="btn-dark-nav">Free Check →</Link>
         </div>
       </nav>
 
@@ -155,14 +213,29 @@ export default function SupportedVehiclesPage() {
 
         {/* COMPATIBILITY SUMMARY RULES BANNER */}
         <div className="notice-banner animate-spring delay-2">
-          <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 12, letterSpacing: -0.5 }}>Don't see your EV on this list?</h3>
+          <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 12, letterSpacing: -0.5 }}>Don&apos;t see your EV on this list?</h3>
           <p style={{ color: "#9ca3af", fontSize: 16, lineHeight: 1.6, maxWidth: 800, margin: "0 auto 0 auto", fontWeight: 500 }}>
-            Do not worry. The list above covers our highly optimized custom data templates, but **any electric vehicle manufactured globally after 1996** utilizes a standardized mandatory OBD-II communication protocol. As long as you can pull raw State of Health (SoH) percentages via your diagnostic application, EV2Trust can instantly process your verification report.
+            Do not worry. The list above covers our highly optimized custom data templates, but{" "}
+            <strong style={{ color: "#ffffff", fontWeight: 800 }}>any electric vehicle manufactured globally after 1996</strong>{" "}
+            utilizes a standardized mandatory OBD-II communication protocol. As long as you can pull raw State of Health (SoH) percentages via your diagnostic application, EV2Trust can instantly process your verification report.
           </p>
         </div>
       </main>
 
-      {/* STANDARDIZED 3-TIER FOOTER (REPLACED PRICING WITH SUPPORTED VEHICLES) */}
+      {/* CTA SECTION */}
+      <div style={{ padding: "0 24px 80px 24px" }}>
+        <section className="animate-spring delay-3" style={{ background: "linear-gradient(135deg, #16a34a 0%, #15803d 100%)", maxWidth: 800, margin: "0 auto", borderRadius: 24, padding: "56px 32px", textAlign: "center", color: "#fff", boxShadow: "0 20px 40px -10px rgba(22, 163, 74, 0.4)" }}>
+          <h3 style={{ fontSize: 28, fontWeight: 900, marginBottom: 12, letterSpacing: -0.5 }}>Ready to check your EV?</h3>
+          <p style={{ color: "#dcfce7", fontSize: 16, marginBottom: 32, fontWeight: 500 }}>
+            Get your free, certified battery health report in under 60 seconds — no account needed.
+          </p>
+          <Link href="/check" className="cta-btn" style={{ background: "#ffffff", color: "#15803d", padding: "16px 36px", borderRadius: 14, fontWeight: 800, fontSize: 16, textDecoration: "none", display: "inline-block" }}>
+            Start your free check →
+          </Link>
+        </section>
+      </div>
+
+      {/* STANDARDIZED 3-TIER FOOTER */}
       <footer style={{ background: "#111827", color: "#9ca3af", padding: "64px 24px 32px 24px", textAlign: "center", marginTop: "auto" }}>
         <div style={{ marginBottom: 24 }}>
           <div style={{ fontWeight: 800, color: "#fff", fontSize: 24, marginBottom: 8 }}>EV<span style={{ color: "#4ade80" }}>2</span>Trust</div>
@@ -171,7 +244,7 @@ export default function SupportedVehiclesPage() {
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", flexWrap: "wrap", marginBottom: 32 }}>
           <Link href="/about" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>About Us</Link>
           <Link href="/how-it-works" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>How it works</Link>
-          <Link href="/supported-vehicles" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Supported Vehicles</Link>
+          <Link href="/supported-vehicles" className="footer-link active" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Supported Vehicles</Link>
           <Link href="/privacy-policy" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Privacy Policy</Link>
           <Link href="/terms" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Terms of Service</Link>
           <Link href="/disclaimer" className="footer-link" style={{ color: "#9ca3af", textDecoration: "none", fontSize: 14 }}>Disclaimer</Link>

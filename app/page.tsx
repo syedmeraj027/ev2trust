@@ -195,7 +195,7 @@ export default function Home() {
 
       {/* 2030 GLASS NAVBAR */}
       <nav className="glass-nav">
-        <div style={{ padding: "0 24px", height: 70, display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ padding: "0 24px", height: 70, display: "flex", alignItems: "center", justifyContent: "space-between"}}>
           <Link href="/" style={{ fontWeight: 900, fontSize: 24, color: "#111827", textDecoration: "none", letterSpacing: "-0.5px", position: "relative", zIndex: 10 }}>
             EV<span style={{ color: "#16a34a" }}>2</span>Trust
           </Link>

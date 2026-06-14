@@ -89,8 +89,8 @@ export default function HowItWorks() {
         .footer-bottom { border-top: 1px solid #1e293b; padding-top: 32px; color: #475569; font-size: 13px; font-weight: 500; }
 
         /* --- MINIMAL NAVBAR --- */
-        .glass-nav { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid #e5e7eb; box-shadow: 0 4px 30px rgba(0,0,0,0.03); }
-        .nav-inner { max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 40px; height: 80px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
+        .glass-nav { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); border-bottom: 1px transparent; box-shadow: 0 4px 30px rgba(0,0,0,0.03); }
+        .nav-inner { width: 100%; padding: 0 40px; height: 80px; display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
         .text-link { color: #374151; font-weight: 600; text-decoration: none; transition: color 0.2s ease; }
         .text-link:hover { color: #16a34a; }
         .nav-links { display: flex; align-items: center; gap: 32px; font-size: 15px; }
